@@ -1,0 +1,42 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>GIF encoder</title>
+<pre id="log"></pre>
+<script type="module">
+import { GIFEncoder, quantize, applyPalette } from "https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js";
+const log = (s) => (document.getElementById("log").textContent += s + "\n");
+const load = (src) => new Promise((ok, bad) => { const i = new Image(); i.onload = () => ok(i); i.onerror = bad; i.src = src; });
+
+// name -> source step (sim frames between captures at 60 fps)
+const STEP = { fog: 6, ssr: 6, retro: 6, mood: 10, painterly: 6, style: 6, combat: 6, water: 8, colossus: 7 };
+
+window.encode = async function (name, { width = 640, colors = 256, crop = null } = {}) {
+  const list = await (await fetch("list.json?" + Date.now())).json();
+  const n = list[name];
+  if (!n) throw new Error("no frames for " + name);
+  const h = Math.round(width * 9 / 16);
+  const cv = new OffscreenCanvas(width, h), ctx = cv.getContext("2d", { willReadFrequently: true });
+  ctx.imageSmoothingQuality = "high";
+  const frames = [];
+  for (let i = 0; i < n; i++) {
+    const img = await load(`frames/${name}/f${String(i).padStart(3, "0")}.png`);
+    const c = crop || [0, 0, img.width, img.height];
+    ctx.drawImage(img, c[0], c[1], c[2], c[3], 0, 0, width, h);
+    frames.push(ctx.getImageData(0, 0, width, h).data);
+  }
+  // One shared palette from a sample of frames: no colour flicker between frames
+  const pick = frames.filter((_, i) => i % Math.max(1, Math.floor(n / 8)) === 0);
+  const sample = new Uint8ClampedArray(pick.reduce((a, f) => a + f.length, 0));
+  let o = 0; for (const f of pick) { sample.set(f, o); o += f.length; }
+  const palette = quantize(sample, colors);
+  const gif = GIFEncoder();
+  const delay = Math.round((STEP[name] || 6) / 60 * 1000);
+  for (const f of frames) gif.writeFrame(applyPalette(f, palette), width, h, { palette, delay });
+  gif.finish();
+  const bytes = gif.bytes();
+  await fetch(`out/${name}.gif`, { method: "PUT", body: bytes });
+  log(`${name}: ${n} frames, ${(bytes.length / 1048576).toFixed(2)} MB`);
+  return bytes.length;
+};
+log("ready");
+</script>

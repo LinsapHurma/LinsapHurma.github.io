@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EriEngine — features</title>
+  <meta name="description" content="EriEngine features: GIFs from the engine with direct links to the source code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="features-page">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a href="index.html" class="logo">&lt;<span id="logo-name"></span>/&gt;</a>
+    <nav>
+      <a href="index.html" data-i18n="f.back"></a>
+      <div class="lang mono" id="lang" role="group" aria-label="Language"></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="f-hero">
+      <p class="mono tag" data-i18n="f.tag"></p>
+      <h1 data-i18n="f.h1"></h1>
+      <p class="lead" data-i18n="f.lead"></p>
+      <p class="note mono" data-i18n="f.private"></p>
+      <nav class="toc" id="toc" aria-label="Contents"></nav>
+    </section>
+
+    <div id="features"></div>
+
+    <section class="section contact" id="contact">
+      <h2><span data-i18n="f.contact"></span></h2>
+      <div class="links" id="links"></div>
+    </section>
+  </main>
+
+  <footer class="mono">© <span id="year"></span> <span id="foot-name"></span></footer>
+
+  <script src="data.js"></script>
+  <script src="features-data.js"></script>
+  <script src="features.js"></script>
+</body>
+</html>

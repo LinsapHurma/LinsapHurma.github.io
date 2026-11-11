@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <meta name="description" content="Portfolio: EriEngine, a DirectX 12 game engine with stylized rendering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a href="#top" class="logo">&lt;<span id="logo-name"></span>/&gt;</a>
+    <nav>
+      <a href="#work" data-i18n="nav.work"></a>
+      <a href="features.html" data-i18n="nav.features"></a>
+      <a href="#about" data-i18n="nav.about"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+      <div class="lang mono" id="lang" role="group" aria-label="Language"></div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="mono tag" data-i18n="hero.tag"></p>
+      <h1>
+        <span data-i18n="hero.hiPre"></span><span class="accent" id="hero-name"></span><span data-i18n="hero.hiPost"></span><br>
+        <span class="typed" id="typed"></span><span class="caret">_</span>
+      </h1>
+      <p class="lead" id="hero-lead"></p>
+      <div class="cta">
+        <a class="btn primary" href="#work" data-i18n="cta.work"></a>
+        <a class="btn" href="features.html" data-i18n="nav.features"></a>
+        <a class="btn" href="#contact" data-i18n="cta.contact"></a>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <h2><span class="mono num">01.</span> <span data-i18n="sec.work"></span></h2>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="about" class="section about">
+      <h2><span class="mono num">02.</span> <span data-i18n="sec.about"></span></h2>
+      <div class="about-wrap">
+        <div>
+          <div id="about-text"></div>
+          <p data-i18n="about.stack"></p>
+          <ul class="skills mono" id="skills"></ul>
+        </div>
+        <div class="terminal mono">
+          <div class="term-bar"><i></i><i></i><i></i></div>
+          <pre id="term"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2><span class="mono num">03.</span> <span data-i18n="sec.contact"></span></h2>
+      <p class="lead" data-i18n="contact.lead"></p>
+      <div class="links" id="links"></div>
+    </section>
+  </main>
+
+  <footer class="mono">© <span id="year"></span> <span id="foot-name"></span> · <span data-i18n="footer.made"></span></footer>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
