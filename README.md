@@ -2,7 +2,7 @@
 
 Portfolio site of エリ: EriEngine, a C++ / DirectX 12 game engine.
 
-- `index.html` — portfolio (EN · 日本語 · RU)
+- `index.html` — portfolio
 - `features.html` — engine features: GIF, short description and direct links to the source files
 - `data.js` — all portfolio text, projects and links
 - `features-data.js` — all feature text, GIFs and file paths
